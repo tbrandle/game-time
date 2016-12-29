@@ -1,0 +1,9 @@
+BUGS
+- when ball bounces off paddle 4 times and hits right hand wall...it gets cray
+
+FEATURES TO ADD
+- create counter for lives.
+     - if ball falls below height, take away from life and reposition ball.
+- reset function
+- initializer key handler
+- block collision and removing object.
