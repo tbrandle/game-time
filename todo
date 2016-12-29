@@ -1,5 +1,5 @@
 BUGS
-- when ball bounces off paddle 4 times and hits right hand wall...it gets cray
+- when ball bounces off paddle 4 times and hits right hand wall...it gets cray -- Fixed (Charlie 12/28)
 
 FEATURES TO ADD
 - create counter for lives.
