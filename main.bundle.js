@@ -45,30 +45,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var Block = __webpack_require__(1);
+	var Paddle = __webpack_require__(2);
 	var canvas = document.getElementById('game');
 	var context = canvas.getContext('2d');
 
 	var blocks = [];
-
-	function Paddle() {
-	  this.x = (canvas.width - 100) / 2;
-	  this.y = 275;
-	  this.width = 100;
-	  this.height = 15;
-	}
-
-	Paddle.prototype.draw = function () {
-	  context.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
-	  return this;
-	};
-
-	Paddle.prototype.move = function (direction) {
-	  if (direction === 37) {
-	    this.x -= 25;
-	  } else if (direction === 39) {
-	    this.x += 25;
-	  }
-	};
 
 	function Ball() {
 	  this.x = canvas.width / 2;
@@ -116,25 +97,25 @@
 	function createFirstRow(num) {
 	  this.x = -50;
 	  for (var i = 0; i < num; i++) {
-	    blocks.push(new Block(x += 60));
+	    blocks.push(new Block(context, x += 60));
 	  }
 	}
 	function createSecondRow(num) {
 	  this.x = -50;
 	  for (var i = 0; i < num; i++) {
-	    blocks.push(new Block(x += 60, 30));
+	    blocks.push(new Block(context, x += 60, 30));
 	  }
 	}
 	function createThirdRow(num) {
 	  this.x = -50;
 	  for (var i = 0; i < num; i++) {
-	    blocks.push(new Block(x += 60, 50));
+	    blocks.push(new Block(context, x += 60, 50));
 	  }
 	}
 	function createFourthRow(num) {
 	  this.x = -50;
 	  for (var i = 0; i < num; i++) {
-	    blocks.push(new Block(x += 60, 70));
+	    blocks.push(new Block(context, x += 60, 70));
 	  }
 	}
 
@@ -165,19 +146,47 @@
 /* 1 */
 /***/ function(module, exports) {
 
-	function Block(x, y, width, height) {
+	
+	function Block(context, x, y, width, height) {
 	  this.x = x || 0;
 	  this.y = y || 10;
 	  this.width = width || 50;
 	  this.height = height || 15;
+	  this.context = context;
 	}
 
 	Block.prototype.draw = function () {
-	  context.fillRect(this.x, this.y, this.width, this.height);
+	  this.context.fillRect(this.x, this.y, this.width, this.height);
 	  return this;
 	};
 
 	module.exports = Block;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	function Paddle() {
+	  this.x = (canvas.width - 100) / 2;
+	  this.y = 275;
+	  this.width = 100;
+	  this.height = 15;
+	}
+
+	Paddle.prototype.draw = function () {
+	  context.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+	  return this;
+	};
+
+	Paddle.prototype.move = function (direction) {
+	  if (direction === 37) {
+	    this.x -= 25;
+	  } else if (direction === 39) {
+	    this.x += 25;
+	  }
+	};
+
+	module.exports = Paddle;
 
 /***/ }
 /******/ ]);
