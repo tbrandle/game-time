@@ -44,44 +44,14 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Block = __webpack_require__(1);
-	var Paddle = __webpack_require__(2);
 	var canvas = document.getElementById('game');
 	var context = canvas.getContext('2d');
 
+	var Block = __webpack_require__(1);
+	var Paddle = __webpack_require__(2);
+	var Ball = __webpack_require__(3);
+
 	var blocks = [];
-
-	function Ball() {
-	  this.x = canvas.width / 2;
-	  this.y = canvas.height / 2;
-	  this.radius = 6;
-	  this.startAngle = 0;
-	  this.endAngle = 2 * Math.PI;
-	  this.dx = 5;
-	  this.dy = -5;
-	}
-
-	Ball.prototype.drawBall = function () {
-	  context.beginPath();
-	  context.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle);
-	  context.fill();
-	  context.closePath();
-	  return this;
-	};
-
-	Ball.prototype.move = function () {
-	  ball.drawBall();
-	  this.x += this.dx;
-	  this.y += this.dy;
-	  if (this.y <= 0) {
-	    this.dy = -this.dy;
-	  } else if (this.x > canvas.width || this.x < 0) {
-	    this.dx = -this.dx;
-	  } else if (this.y === paddle.y && paddle.x + paddle.width > this.x && this.x > paddle.x) {
-	    this.dy = -this.dy;
-	  }
-	  return this;
-	};
 
 	var paddle = new Paddle();
 	var ball = new Ball();
@@ -144,8 +114,13 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	var canvas = document.getElementById('game');
+	var context = canvas.getContext('2d');
+
+	var Paddle = __webpack_require__(2);
+	var Ball = __webpack_require__(3);
 
 	function Block(context, x, y, width, height) {
 	  this.x = x || 0;
@@ -164,7 +139,13 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	var canvas = document.getElementById('game');
+	var context = canvas.getContext('2d');
+
+	var Block = __webpack_require__(1);
+	var Ball = __webpack_require__(3);
 
 	function Paddle() {
 	  this.x = (canvas.width - 100) / 2;
@@ -174,7 +155,7 @@
 	}
 
 	Paddle.prototype.draw = function () {
-	  context.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+	  context.fillRect(this.x, this.y, this.width, this.height);
 	  return this;
 	};
 
@@ -187,6 +168,50 @@
 	};
 
 	module.exports = Paddle;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var canvas = document.getElementById('game');
+	var context = canvas.getContext('2d');
+
+	var Block = __webpack_require__(1);
+	var Paddle = __webpack_require__(2);
+
+	function Ball() {
+	  this.x = canvas.width / 2;
+	  this.y = canvas.height / 2;
+	  this.radius = 6;
+	  this.startAngle = 0;
+	  this.endAngle = 2 * Math.PI;
+	  this.dx = 5;
+	  this.dy = -5;
+	}
+
+	Ball.prototype.drawBall = function () {
+	  context.beginPath();
+	  context.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle);
+	  context.fill();
+	  context.closePath();
+	  return this;
+	};
+
+	Ball.prototype.move = function () {
+	  this.drawBall();
+	  this.x += this.dx;
+	  this.y += this.dy;
+	  if (this.y <= 0) {
+	    this.dy = -this.dy;
+	  } else if (this.x > canvas.width || this.x < 0) {
+	    this.dx = -this.dx;
+	  } else if (this.y === paddle.y && paddle.x + paddle.width > this.x && this.x > paddle.x) {
+	    this.dy = -this.dy;
+	  }
+	  return this;
+	};
+
+	module.exports = Ball;
 
 /***/ }
 /******/ ]);
