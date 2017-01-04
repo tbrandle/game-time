@@ -188,7 +188,7 @@
 	  return this;
 	};
 
-	Ball.prototype.move = function (paddle) {
+	Ball.prototype.move = function (paddle, canvas) {
 	  this.drawBall();
 	  this.x += this.dx;
 	  this.y += this.dy;
