@@ -1,5 +1,4 @@
 BUGS
-- when ball bounces off paddle 4 times and hits right hand wall...it gets cray -- Fixed (Charlie 12/28)
 
 FEATURES TO ADD
 - create counter for lives.
@@ -7,3 +6,4 @@ FEATURES TO ADD
 - reset function
 - initializer key handler
 - block collision and removing object.
+- Pull collision detection for ball and paddle and create a function or object to maintain singular responsibility.

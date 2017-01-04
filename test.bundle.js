@@ -62,13 +62,10 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	var canvas = document.getElementById('game');
 	var context = canvas.getContext('2d');
-
-	var Paddle = __webpack_require__(2);
-	var Ball = __webpack_require__(3);
 
 	function Block(context, x, y, width, height) {
 	  this.x = x || 0;
@@ -87,13 +84,10 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	var canvas = document.getElementById('game');
 	var context = canvas.getContext('2d');
-
-	var Block = __webpack_require__(1);
-	var Ball = __webpack_require__(3);
 
 	function Paddle() {
 	  this.x = (canvas.width - 100) / 2;
@@ -119,13 +113,10 @@
 
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	var canvas = document.getElementById('game');
 	var context = canvas.getContext('2d');
-
-	var Block = __webpack_require__(1);
-	var Paddle = __webpack_require__(2);
 
 	function Ball() {
 	  this.x = canvas.width / 2;
@@ -145,7 +136,7 @@
 	  return this;
 	};
 
-	Ball.prototype.move = function () {
+	Ball.prototype.move = function (paddle) {
 	  this.drawBall();
 	  this.x += this.dx;
 	  this.y += this.dy;
