@@ -136,17 +136,10 @@
 	  return this;
 	};
 
-	Ball.prototype.move = function (paddle, canvas) {
+	Ball.prototype.move = function () {
 	  this.drawBall();
 	  this.x += this.dx;
 	  this.y += this.dy;
-	  if (this.y <= 0) {
-	    this.dy = -this.dy;
-	  } else if (this.x > canvas.width || this.x < 0) {
-	    this.dx = -this.dx;
-	  } else if (this.y === paddle.y && paddle.x + paddle.width > this.x && this.x > paddle.x) {
-	    this.dy = -this.dy;
-	  }
 	  return this;
 	};
 
