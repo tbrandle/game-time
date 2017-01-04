@@ -146,7 +146,7 @@
 /* 1 */
 /***/ function(module, exports) {
 
-	
+
 	function Block(context, x, y, width, height) {
 	  this.x = x || 0;
 	  this.y = y || 10;
