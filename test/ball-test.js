@@ -1,5 +1,7 @@
-var assert = require('chai').assert;
-var Ball = require('../lib/ball');
+const chai = require('chai');
+const assert = chai.assert;
+
+const Ball = require('../lib/ball');
 
 describe('Ball', function () {
 
@@ -9,21 +11,24 @@ describe('Ball', function () {
 });
 
 describe('ball prototypes', function () {
+  var ball = new Ball({context: {}, canvas:{width: 400, height: 300}});
 
   it('should have a method called "drawBall()"', function () {
-    var ball = new Ball;
     assert.isFunction(ball.drawBall);
   })
-  it.skip('"drawBall()" should draw a circle on the canvas', function () {
 
+  it('should have a method called "move()"', function () {
+      assert.isFunction(ball.move)
   })
+  it('"move()" should move increase the speed of the ball by this.dx and this.dy', function () {
 
-  it.skip('should have a method called "move()"', function () {
+    ball.move();
 
-  })
-  it.skip('"move()" should move increase the speed of the ball by this.dx and this.dy', function () {
-
+    assert.equal(ball.x, 202);
+    assert.equal(ball.y, 148);
   })
 
 
 })
+
+// var ball = new Ball ({x: 10, y: 10,, context: {} canvas:{width: 500, height: 300}})

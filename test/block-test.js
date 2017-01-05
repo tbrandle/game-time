@@ -1,9 +1,16 @@
-var assert = require('chai').assert;
-var Block = require('../lib/block');
+const chai = require('chai');
+const assert = chai.assert;
 
-describe('block contructor', function() {
+const Block = require('../lib/block');
 
-  it('creates new blocks', function() {
-    assert.isFunction(Block);
-  });
+describe('block', function() {
+  context('with default attributes', function() {
+    it('creates new blocks', function() {
+      assert.isFunction(Block);
+    });
+    it('should have default x coordinate of 0', function() {
+      var block = new Block({});      
+      assert.equal(block.x, 0);
+    });
+  })
 });
