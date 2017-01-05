@@ -44,17 +44,22 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var canvas = document.getElementById('game');
-	var context = canvas.getContext('2d');
+	const canvas = document.getElementById('game');
+	const context = canvas.getContext('2d');
 
-	var Block = __webpack_require__(1);
-	var Paddle = __webpack_require__(2);
-	var Ball = __webpack_require__(3);
+	const Block = __webpack_require__(1);
+	const Paddle = __webpack_require__(2);
+	const Ball = __webpack_require__(3);
+
+	let block = new Block({ context: context });
+	let ball = new Ball({ context: context, canvas: canvas });
+	let paddle = new Paddle({ context: context, canvas: canvas });
 
 	var blocks = [];
 
-	var paddle = new Paddle();
-	var ball = new Ball();
+	// var paddle = new Paddle();
+	// var ball = new Ball();
+
 
 	function paddleBoundaries() {
 	  if (paddle.x >= canvas.width - paddle.width) {
@@ -64,36 +69,64 @@
 	  }
 	}
 
+	function up(obj) {
+	  obj.dy = -obj.speed;
+	}
+
+	function down(obj) {
+	  obj.dy = obj.speed;
+	}
+
+	function right(obj) {
+	  obj.dx = obj.speed;
+	}
+
+	function left(obj) {
+	  obj.dx = -obj.speed;
+	}
+
 	function ballBoundries() {
-	  if (ball.y <= 0) {
-	    ball.dy = -ball.dy;
-	  } else if (ball.x > canvas.width || ball.x < 0) {
-	    ball.dx = -ball.dx;
-	  } else if (ball.y === paddle.y && paddle.x + paddle.width > ball.x && ball.x > paddle.x) {
-	    ball.dy = -ball.dy;
+	  if (ball.y - ball.radius <= 0) {
+	    ball.y = ball.radius;
+	    down(ball);
+	  }
+	  if (ball.x + ball.radius > canvas.width) {
+	    ball.x = canvas.width - ball.radius;
+	    left(ball);
+	  }
+	  if (ball.x - ball.radius < 0) {
+	    ball.x = ball.radius;
+	    right(ball);
+	  }
+	  if (ball.y + ball.radius > paddle.y && paddle.x + paddle.width > ball.x + ball.radius && ball.x - ball.radius > paddle.x && ball.y + ball.radius < paddle.y + paddle.height) {
+	    up(ball);
 	  }
 	}
 
-	function blockBoundries() {
-	  blocks.forEach(function (block) {
-
-	    var bottomLeft = block.y + block.height;
-	    var topRight = block.x + block.width;
-	    var bottomRight = topRight + bottomLeft;
-
-	    if (ball.y === bottomLeft && bottomRight > ball.x && ball.x > bottomLeft) {
-	      ball.dy = -ball.dy;
-	    }
-	    if (ball.y === block.x && topRight > ball.x && ball.x > block.x) {
-	      ball.dy = -ball.dy;
-	    }
-	    if (ball.x === bottomLeft && ball.y < bottomLeft && ball.y > topLeft) {
-	      ball.dx = -ball.dx;
-	    }
-	    if (ball.x === bottomRight && ball.y < bottomRight && ball.y > topRight) {
-	      ball.dx = -ball.dx;
-	    }
-	  });
+	function blockBoundries(block) {
+	  if (ball.y - ball.radius <= block.y + block.height && ball.x + ball.radius < block.x + block.width && ball.x > block.x && ball.y - ball.radius > block.y) {
+	    ball.y = ball.y + ball.radius;
+	    down(ball);
+	  }
+	  if (ball.x + ball.radius > block.x && ball.x + ball.radius < block.x + block.width && ball.y > block.y && ball.y < block.y + block.height) {
+	    ball.x = ball.x + ball.radius;
+	    left(ball);
+	  }
+	  // if ((ball.x + ball.radius) <= block.y + block.height && (ball.x + ball.radius) > block.x + block.width && (ball.x + ball.radius) > block.x && (ball.y + ball.radius) > block.y) {
+	  //    ball.x = ball.x - ball.radius;
+	  //    left(ball);
+	  //  }
+	  if (ball.x - ball.radius < block.x + block.height && ball.y - ball.radius > block.y && ball.y + ball.radius < block.y + block.height) {
+	    ball.x = ball.x - ball.radius;
+	    right(ball);
+	  }
+	  // if ((ball.x - ball.radius) < 0){
+	  //    ball.x = ball.radius;
+	  //    right(ball);
+	  //  }
+	  if (ball.y + ball.radius > block.y && block.x + block.width > ball.x + ball.radius && ball.x - ball.radius > block.x && ball.y + ball.radius < block.y + block.height) {
+	    up(ball);
+	  }
 	}
 
 	function createFirstRow(num) {
@@ -109,23 +142,22 @@
 	  }
 	}
 	function createThirdRow(num) {
-	  this.x = -50;
+	  this.x = 50;
 	  for (var i = 0; i < num; i++) {
 	    blocks.push(new Block(context, x += 60, 50));
 	  }
 	}
 	function createFourthRow(num) {
-	  this.x = -50;
+	  this.x = 40;
 	  for (var i = 0; i < num; i++) {
 	    blocks.push(new Block(context, x += 60, 70));
 	  }
 	}
 
-	createFirstRow(6);
-	createSecondRow(6);
-	// createThirdRow(6)
-	// createFourthRow(6)
-
+	// createFirstRow(6);
+	// createSecondRow(6);
+	createThirdRow(4);
+	createFourthRow(4);
 
 	//Event Listeners
 
@@ -135,15 +167,15 @@
 	});
 
 	requestAnimationFrame(function gameLoop() {
-	  paddleBoundaries();
-	  ballBoundries();
-	  blockBoundries();
 	  context.clearRect(0, 0, canvas.width, canvas.height);
 	  paddle.draw();
 	  ball.drawBall().move();
 	  blocks.forEach(function (block) {
 	    block.draw();
+	    blockBoundries(block);
 	  });
+	  paddleBoundaries();
+	  ballBoundries();
 	  requestAnimationFrame(gameLoop);
 	});
 
@@ -151,15 +183,12 @@
 /* 1 */
 /***/ function(module, exports) {
 
-	var canvas = document.getElementById('game');
-	var context = canvas.getContext('2d');
-
-	function Block(context, x, y, width, height) {
-	  this.x = x || 0;
-	  this.y = y || 10;
-	  this.width = width || 50;
-	  this.height = height || 15;
-	  this.context = context;
+	function Block(options) {
+	  this.x = 0;
+	  this.y = 10;
+	  this.width = 50;
+	  this.height = 15;
+	  this.context = options.context;
 	}
 
 	Block.prototype.draw = function () {
@@ -173,18 +202,16 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	var canvas = document.getElementById('game');
-	var context = canvas.getContext('2d');
-
-	function Paddle() {
-	  this.x = (canvas.width - this.width) / 2;
+	function Paddle(options) {
+	  this.x = (options.canvas.width - 100) / 2;
 	  this.y = 275;
 	  this.width = 100;
 	  this.height = 15;
+	  this.context = options.context;
 	}
 
 	Paddle.prototype.draw = function () {
-	  context.fillRect(this.x, this.y, this.width, this.height);
+	  this.context.fillRect(this.x, this.y, this.width, this.height);
 	  return this;
 	};
 
@@ -202,29 +229,28 @@
 /* 3 */
 /***/ function(module, exports) {
 
-	var canvas = document.getElementById('game');
-	var context = canvas.getContext('2d');
-
-	function Ball() {
-	  this.x = canvas.width / 2;
-	  this.y = canvas.height / 2;
+	function Ball(options) {
+	  this.x = options.canvas.width / 2;
+	  this.y = options.canvas.height / 2;
 	  this.radius = 6;
 	  this.startAngle = 0;
 	  this.endAngle = 2 * Math.PI;
-	  this.dx = 5;
-	  this.dy = -5;
+	  this.context = options.context;
+	  this.speed = 2;
+	  this.dx = this.speed;
+	  this.dy = -this.speed;
 	}
 
 	Ball.prototype.drawBall = function () {
-	  context.beginPath();
-	  context.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle);
-	  context.fill();
-	  context.closePath();
+	  this.context.beginPath();
+	  this.context.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle);
+	  this.context.fill();
+	  this.context.closePath();
 	  return this;
 	};
 
 	Ball.prototype.move = function () {
-	  this.drawBall();
+	  // this.drawBall();
 	  this.x += this.dx;
 	  this.y += this.dy;
 	  return this;
