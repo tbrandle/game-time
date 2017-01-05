@@ -142,7 +142,7 @@
 	var context = canvas.getContext('2d');
 
 	function Paddle() {
-	  this.x = (canvas.width - 100) / 2;
+	  this.x = (canvas.width - this.width) / 2;
 	  this.y = 275;
 	  this.width = 100;
 	  this.height = 15;

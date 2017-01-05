@@ -90,7 +90,7 @@
 	var context = canvas.getContext('2d');
 
 	function Paddle() {
-	  this.x = (canvas.width - 100) / 2;
+	  this.x = (canvas.width - this.width) / 2;
 	  this.y = 275;
 	  this.width = 100;
 	  this.height = 15;
@@ -8878,6 +8878,11 @@
 
 	  it('create paddle', function () {
 	    assert.isFunction(Paddle);
+	  });
+
+	  it('paddle has a default x position in center of canvas', function () {
+	    var paddle = new Paddle();
+	    assert.equal(paddle.height, 15);
 	  });
 	});
 
