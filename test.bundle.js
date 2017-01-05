@@ -136,17 +136,10 @@
 	  return this;
 	};
 
-	Ball.prototype.move = function (paddle) {
+	Ball.prototype.move = function () {
 	  this.drawBall();
 	  this.x += this.dx;
 	  this.y += this.dy;
-	  if (this.y <= 0) {
-	    this.dy = -this.dy;
-	  } else if (this.x > canvas.width || this.x < 0) {
-	    this.dx = -this.dx;
-	  } else if (this.y === paddle.y && paddle.x + paddle.width > this.x && this.x > paddle.x) {
-	    this.dy = -this.dy;
-	  }
 	  return this;
 	};
 
@@ -8893,11 +8886,23 @@
 	var assert = __webpack_require__(14).assert;
 	var Ball = __webpack_require__(3);
 
-	describe('Ball is a constructor function', function () {
+	describe('Ball', function () {
 
 	  it('should create a ball object', function () {
 	    assert.isFunction(Ball);
 	  });
+	});
+
+	describe('ball prototypes', function () {
+
+	  it('should have a method called "drawBall()"', function () {
+	    var ball = new Ball();
+	    assert.isFunction(ball.drawBall);
+	  });
+	  it.skip('"drawBall()" should draw a circle on the canvas', function () {});
+
+	  it.skip('should have a method called "move()"', function () {});
+	  it.skip('"move()" should move increase the speed of the ball by this.dx and this.dy', function () {});
 	});
 
 /***/ },

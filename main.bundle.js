@@ -56,12 +56,44 @@
 	var paddle = new Paddle();
 	var ball = new Ball();
 
-	function boundaries() {
+	function paddleBoundaries() {
 	  if (paddle.x >= canvas.width - paddle.width) {
 	    paddle.x = 300;
 	  } else if (paddle.x <= 0) {
 	    paddle.x = 0;
 	  }
+	}
+
+	function ballBoundries() {
+	  if (ball.y <= 0) {
+	    ball.dy = -ball.dy;
+	  } else if (ball.x > canvas.width || ball.x < 0) {
+	    ball.dx = -ball.dx;
+	  } else if (ball.y === paddle.y && paddle.x + paddle.width > ball.x && ball.x > paddle.x) {
+	    ball.dy = -ball.dy;
+	  }
+	}
+
+	function blockBoundries() {
+	  blocks.forEach(function (block) {
+
+	    var bottomLeft = block.y + block.height;
+	    var topRight = block.x + block.width;
+	    var bottomRight = topRight + bottomLeft;
+
+	    if (ball.y === bottomLeft && bottomRight > ball.x && ball.x > bottomLeft) {
+	      ball.dy = -ball.dy;
+	    }
+	    if (ball.y === block.x && topRight > ball.x && ball.x > block.x) {
+	      ball.dy = -ball.dy;
+	    }
+	    if (ball.x === bottomLeft && ball.y < bottomLeft && ball.y > topLeft) {
+	      ball.dx = -ball.dx;
+	    }
+	    if (ball.x === bottomRight && ball.y < bottomRight && ball.y > topRight) {
+	      ball.dx = -ball.dx;
+	    }
+	  });
 	}
 
 	function createFirstRow(num) {
@@ -91,8 +123,9 @@
 
 	createFirstRow(6);
 	createSecondRow(6);
-	createThirdRow(6);
-	createFourthRow(6);
+	// createThirdRow(6)
+	// createFourthRow(6)
+
 
 	//Event Listeners
 
@@ -102,10 +135,12 @@
 	});
 
 	requestAnimationFrame(function gameLoop() {
-	  boundaries();
+	  paddleBoundaries();
+	  ballBoundries();
+	  blockBoundries();
 	  context.clearRect(0, 0, canvas.width, canvas.height);
 	  paddle.draw();
-	  ball.drawBall().move(paddle);
+	  ball.drawBall().move();
 	  blocks.forEach(function (block) {
 	    block.draw();
 	  });
@@ -188,17 +223,10 @@
 	  return this;
 	};
 
-	Ball.prototype.move = function (paddle) {
+	Ball.prototype.move = function () {
 	  this.drawBall();
 	  this.x += this.dx;
 	  this.y += this.dy;
-	  if (this.y <= 0) {
-	    this.dy = -this.dy;
-	  } else if (this.x > canvas.width || this.x < 0) {
-	    this.dx = -this.dx;
-	  } else if (this.y === paddle.y && paddle.x + paddle.width > this.x && this.x > paddle.x) {
-	    this.dy = -this.dy;
-	  }
 	  return this;
 	};
 
