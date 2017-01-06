@@ -1,5 +1,5 @@
 BUGS
-- ball cuts the bottom corners of the paddle...need to set the boundry for the y axis of the paddle.
+- Blocks are glitchy and flash/blink when hit by the ball.
 
 FEATURES TO ADD
 - create counter for lives.
