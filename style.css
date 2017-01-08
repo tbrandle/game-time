@@ -1,3 +1,8 @@
+
+body {
+  background-color: lightgrey;
+}
+
 .game-canvas {
   border: 3px solid;
   margin: auto;
@@ -5,6 +10,18 @@
   background-color: white;
 }
 
-body {
-  background-color: lightgrey;
+.game-over {
+  background-image: url("https://lh3.googleusercontent.com/-IpuLsSdt-jQ/AAAAAAAAAAI/AAAAAAAAABE/IwmvujJw1GY/photo.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-color: white;
+  background-position: 55px;
+  opacity: .8;
+  width: 400px;
+  height:300px;
+  display: none;
+  margin: 0 auto;
+  position: absolute;
+  top: 10.5px;
+  left: 11%;
 }
