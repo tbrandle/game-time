@@ -1,5 +1,10 @@
 .game-canvas {
-  border: 1px dashed;
+  border: 3px solid;
   margin: auto;
   display: block;
+  background-color: white;
+}
+
+body {
+  background-color: lightgrey;
 }
