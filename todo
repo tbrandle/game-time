@@ -1,5 +1,5 @@
 BUGS
-- Blocks are glitchy and flash/blink when hit by the ball.
+- Player can still play when level message is up.
 
 FEATURES TO ADD
 - create counter for lives.
