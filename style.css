@@ -40,8 +40,16 @@ body {
   font-weight: 800;
 }
 
+.game-over {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 0 5px 0;
+}
+
 .start-game {
-  padding: 5px 15px;
+  padding: 7px 15px 5px;
   background-color: firebrick;
   color: #fff;
   cursor: pointer;
@@ -59,4 +67,9 @@ body {
   background-repeat: no-repeat;
   background-size: auto;
   background-position: 55px;
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-between;
 }
