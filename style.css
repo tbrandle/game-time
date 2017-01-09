@@ -51,7 +51,9 @@ body {
 }
 
 .winner {
-  background-image: url();
+  background-image: url('http://www.clipartkid.com/images/472/drinking-beer-clip-art-bigstock-retro-beer-guy-clip-art-17343080-jpg-rVj2yW-clipart.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .game-over {
