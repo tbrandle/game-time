@@ -1,3 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: lightgrey;
+}
+
+.game-wrap {
+  position: relative;
+  width: 400px;
+  margin: 0 auto;
+}
+
 .game-canvas {
   border: 3px solid;
   margin: auto;
@@ -5,6 +19,40 @@
   background-color: white;
 }
 
-body {
-  background-color: lightgrey;
+.game-over,
+.winner {
+  background-color: rgba(255, 255, 255, .8);
+  width: 400px;
+  height:300px;
+  display: none;
+  margin: 0 auto;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+.winner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+}
+
+.start-game {
+  padding: 5px 15px;
+  background-color: firebrick;
+  color: #fff;
+  cursor: pointer;
+  border-style: none;
+  border-radius: 5px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.game-over {
+  background-image: url("https://lh3.googleusercontent.com/-IpuLsSdt-jQ/AAAAAAAAAAI/AAAAAAAAABE/IwmvujJw1GY/photo.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 55px;
 }
