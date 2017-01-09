@@ -54,7 +54,8 @@ body {
   background-position: 55px;
 }
 
-.start-game {
+.start-game,
+.start-new-game {
   padding: 7px 15px 5px;
   background-color: firebrick;
   color: #fff;
