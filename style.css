@@ -21,7 +21,6 @@ body {
 
 
 .message {
-  background-color: rgba(255, 255, 255, .8);
   width: 400px;
   height:300px;
   display: none;
@@ -38,6 +37,8 @@ body {
   align-items: center;
   font-family: 'Orbitron', sans-serif;
   font-weight: 800;
+  background-color: rgba(255, 255, 255, .8);
+
 }
 
 .game-over {
@@ -46,6 +47,11 @@ body {
   justify-content: flex-end;
   align-items: center;
   padding: 0 0 5px 0;
+  background-color: rgba(255, 255, 255, .8);
+  background-image: url("images/gameover.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 55px;
 }
 
 .start-game {
@@ -62,13 +68,8 @@ body {
   background-image: url('http://www.clipartkid.com/images/472/drinking-beer-clip-art-bigstock-retro-beer-guy-clip-art-17343080-jpg-rVj2yW-clipart.jpg');
   background-repeat: no-repeat;
   background-size: contain;
-}
-
-.game-over {
-  background-image: url("https://lh3.googleusercontent.com/-IpuLsSdt-jQ/AAAAAAAAAAI/AAAAAAAAABE/IwmvujJw1GY/photo.jpg");
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: 55px;
+  background-color: white;
+  /*display: flex;*/
 }
 
 .game-stats {
