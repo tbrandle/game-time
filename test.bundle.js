@@ -69,9 +69,16 @@
 	  this.y = options.y || 10;
 	  this.width = options.width || 50;
 	  this.height = options.height || 15;
+	  this.counter = options.counter || 1;
+
 	  this.context = options.context;
-	  this.counter = 1;
 	}
+
+	// Block.prototype.blockColor =  function () {
+	//   if (this.counter === 3 ) {
+	//     this.context.fillStyle = "#ff0000"
+	//   }
+	// }
 
 	Block.prototype.draw = function () {
 	  this.context.fillRect(this.x, this.y, this.width, this.height);
@@ -79,6 +86,10 @@
 	};
 
 	Block.prototype.remove = function (ball, blocks) {
+	  if (this.counter <= 0) {
+	    this.context.clearRect(this.x, this.y, this.width, this.height);
+	    this.height = 0;
+	  }
 	  if (ball.y - ball.radius < this.y + this.height && ball.x < this.x + this.width && ball.x > this.x && ball.y - ball.radius > this.y) {
 	    this.counter--;
 	  }
@@ -90,11 +101,6 @@
 	  }
 	  if (ball.x - ball.radius > this.x && ball.x - ball.radius < this.x + this.width && ball.y > this.y && ball.y < this.y + this.height) {
 	    this.counter--;
-	  }
-	  if (this.counter === 0) {
-	    var index = blocks.indexOf(this);
-	    this.context.clearRect(this.x, this.y, this.width, this.height);
-	    blocks.splice(index, 1);
 	  }
 	};
 
@@ -138,9 +144,10 @@
 	  this.startAngle = 0;
 	  this.endAngle = 2 * Math.PI;
 	  this.context = options.context;
-	  this.speed = 2;
+	  this.speed = 3;
 	  this.dx = this.speed;
 	  this.dy = -this.speed;
+	  this.lives = 3;
 	}
 
 	Ball.prototype.drawBall = function () {
@@ -8870,14 +8877,41 @@
 
 	const Block = __webpack_require__(1);
 
-	describe('block', function () {
+	describe('Block', function () {
 	  context('with default attributes', function () {
+
 	    it('creates new blocks', function () {
 	      assert.isFunction(Block);
 	    });
+
 	    it('should have default x coordinate of 0', function () {
 	      var block = new Block({});
 	      assert.equal(block.x, 0);
+	    });
+
+	    it('should have default y coordinate of 10', function () {
+	      var block = new Block({});
+	      assert.equal(block.y, 10);
+	    });
+
+	    it('should have default width of 50', function () {
+	      var block = new Block({});
+	      assert.equal(block.width, 50);
+	    });
+
+	    it('should have default height of 15', function () {
+	      var block = new Block({});
+	      assert.equal(block.height, 15);
+	    });
+
+	    it('should have default counter set to 1', function () {
+	      var block = new Block({});
+	      assert.equal(block.counter, 1);
+	    });
+
+	    it('should have a method called remove', function () {
+	      var block = new Block({});
+	      assert.isFunction(block.remove);
 	    });
 	  });
 	});
