@@ -91,45 +91,13 @@
 	};
 
 	Block.prototype.remove = function (ball) {
-	  if (ball) {
-	    if (this.counter <= 0) {
-	      this.context.clearRect(this.x, this.y, this.width, this.height);
-	      this.height = 0;
-	      // console.log(this.counter);
-	    }
-
-	    if (ball.y - ball.radius >= this.y + this.height && ball.y + ball.radius <= this.y && ball.x + ball.radius <= this.x && ball.x - ball.radius >= this.x + this.width) {
-	      console.log("test");
-	      this.counter--;
-	    }
+	  if (this.counter <= 0) {
+	    this.context.clearRect(this.x, this.y, this.width, this.height);
+	    this.height = 0;
+	    this.width = 0;
+	  } else {
+	    this.counter--;
 	  }
-	  //
-	  // if ((ball.y - ball.radius) < this.y + this.height && ball.x < this.x + this.width && ball.x > this.x && (ball.y - ball.radius) > this.y) {
-	  //   // ball.gameScore += 10;
-	  //   this.counter--;
-	  //   // console.log(this.counter);
-	  //
-	  // }
-	  //
-	  // if ((ball.y + ball.radius) > this.y && (ball.y + ball.radius) < this.y + this.height && ball.x < this.x + this.width && ball.x > this.x) {
-	  //   // ball.gameScore += 10;
-	  //   this.counter--;
-	  //   // console.log(this.counter);
-	  //
-	  // }
-	  //
-	  // if ((ball.x + ball.radius) > this.x && (ball.x + ball.radius) < this.x + this.width && ball.y > this.y && ball.y < this.y + this.height) {
-	  //   // ball.gameScore += 10;
-	  //   this.counter--;
-	  //   // console.log(this.counter);
-	  //
-	  // }
-	  //
-	  // if ((ball.x - ball.radius) > this.x && (ball.x - ball.radius) < this.x + this.width && ball.y > this.y && ball.y < this.y + this.height) {
-	  //   ball.gameScore += 10;
-	  //   this.counter--;
-	  //   ball.gameScore += 10;
-	  // }
 	};
 
 	module.exports = Block;
@@ -137,8 +105,6 @@
 /***/ },
 /* 2 */
 /***/ function(module, exports) {
-
-	
 
 	function Paddle(options) {
 	  this.x = 150;
@@ -178,8 +144,8 @@
 /* 3 */
 /***/ function(module, exports) {
 
-	const canvas = document.getElementById('game');
-	const context = canvas.getContext('2d');
+	// const canvas = document.getElementById('game');
+	// const context = canvas.getContext('2d');
 
 	function Ball(options) {
 	  this.x = 200;
@@ -227,8 +193,7 @@
 	      ball.moveBallTrigger = true;
 	    }
 	  });
-	  if (this.moveBallTrigger === true) {
-	    //Need to add the (&& this.startGameTrigger === true)
+	  if (this.moveBallTrigger === true && this.startGameTrigger === true) {
 	    ball.move();
 	  }
 	};
@@ -273,28 +238,28 @@
 	    this.y = this.y + this.radius;
 	    this.down();
 	    if (object.type === "block") {
-	      object.remove(game.ball);
+	      object.remove(this);
 	    }
 	  }
 	  if (this.y + this.radius > object.y && this.y + this.radius < object.y + object.height && this.x < object.x + object.width && this.x > object.x) {
 	    this.y = this.y - this.radius;
 	    this.up();
 	    if (object.type === "block") {
-	      object.remove(game.ball);
+	      object.remove(this);
 	    }
 	  }
 	  if (this.x + this.radius > object.x && this.x + this.radius < object.x + object.width && this.y > object.y && this.y < object.y + object.height) {
 	    this.x = this.x - this.radius;
 	    this.left();
 	    if (object.type === "block") {
-	      object.remove(game.ball);
+	      object.remove(this);
 	    }
 	  }
 	  if (this.x - this.radius > object.x && this.x - this.radius < object.x + object.width && this.y > object.y && this.y < object.y + object.height) {
 	    this.x = this.x + this.radius;
 	    this.right();
 	    if (object.type === "block") {
-	      object.remove(game.ball);
+	      object.remove(this);
 	    }
 	  }
 	};
@@ -9014,41 +8979,39 @@
 	const Block = __webpack_require__(1);
 
 	describe('Block', function () {
-	  context('with default attributes', function () {
 
-	    it('creates new blocks', function () {
-	      assert.isFunction(Block);
-	    });
+	  it('creates new blocks', function () {
+	    assert.isFunction(Block);
+	  });
 
-	    it('should have default x coordinate of 0', function () {
-	      var block = new Block({});
-	      assert.equal(block.x, 0);
-	    });
+	  it('should have default x coordinate of 0', function () {
+	    var block = new Block({});
+	    assert.equal(block.x, 0);
+	  });
 
-	    it('should have default y coordinate of 10', function () {
-	      var block = new Block({});
-	      assert.equal(block.y, 10);
-	    });
+	  it('should have default y coordinate of 10', function () {
+	    var block = new Block({});
+	    assert.equal(block.y, 10);
+	  });
 
-	    it('should have default width of 50', function () {
-	      var block = new Block({});
-	      assert.equal(block.width, 50);
-	    });
+	  it('should have default width of 50', function () {
+	    var block = new Block({});
+	    assert.equal(block.width, 50);
+	  });
 
-	    it('should have default height of 15', function () {
-	      var block = new Block({});
-	      assert.equal(block.height, 15);
-	    });
+	  it('should have default height of 15', function () {
+	    var block = new Block({});
+	    assert.equal(block.height, 15);
+	  });
 
-	    it('should have default counter set to 1', function () {
-	      var block = new Block({});
-	      assert.equal(block.counter, 1);
-	    });
+	  it('should have default counter set to 1', function () {
+	    var block = new Block({});
+	    assert.equal(block.counter, 1);
+	  });
 
-	    it('should have a method called remove', function () {
-	      var block = new Block({});
-	      assert.isFunction(block.remove);
-	    });
+	  it('should have a method called remove', function () {
+	    var block = new Block({});
+	    assert.isFunction(block.remove);
 	  });
 	});
 
@@ -9061,20 +9024,43 @@
 
 	const Paddle = __webpack_require__(2);
 
-	describe('paddle object contructor', function () {
+	describe('Paddle', function () {
 
 	  it('create paddle', function () {
 	    assert.isFunction(Paddle);
 	  });
 
-	  it('should have default y position', function () {
+	  it('should have a default x position', function () {
+	    var paddle = new Paddle({ context: {}, canvas: { width: 400 } });
+	    assert.equal(paddle.x, 150);
+	  });
+
+	  it('should have a default y position', function () {
 	    var paddle = new Paddle({ context: {}, canvas: { width: 400 } });
 	    assert.equal(paddle.y, 275);
 	  });
 
-	  it('should have a default width of 100', function () {
-	    var paddle = new Paddle({ context: {}, canvas: { width: 400 } });
-	    assert.equal(paddle.x, 150);
+	  it('should have a default width', function () {
+	    var paddle = new Paddle({ context: {}, canvas: {} });
+	    assert.equal(paddle.width, 100);
+	  });
+
+	  it('should have a default height', function () {
+	    var paddle = new Paddle({ context: {}, canvas: {} });
+	    assert.equal(paddle.height, 10);
+	  });
+
+	  it('should have a default color', function () {
+	    var paddle = new Paddle({ context: {}, canvas: {} });
+	    assert.equal(paddle.color, '#91c09e');
+	  });
+	});
+
+	describe('Paddle prototypes', function () {
+
+	  it('should have a move method', function () {
+	    var paddle = new Paddle({ context: {}, canvas: {} });
+	    assert.isFunction(paddle.move);
 	  });
 	});
 
@@ -9092,9 +9078,64 @@
 	  it('should create a ball object', function () {
 	    assert.isFunction(Ball);
 	  });
+
+	  it('should have a default x position', function () {
+	    var ball = new Ball({ context: {}, canvas: { width: 400 } });
+	    assert.equal(ball.x, 200);
+	  });
+
+	  it('should have a default y position', function () {
+	    var ball = new Ball({ context: {}, canvas: {} });
+	    assert.equal(ball.y, 260);
+	  });
+
+	  it('should have a radius of 6', function () {
+	    var ball = new Ball({ context: {}, canvas: {} });
+	    assert.equal(ball.radius, 6);
+	  });
+
+	  it('should have a start angle of 0', function () {
+	    var ball = new Ball({ context: {}, canvas: {} });
+	    assert.equal(ball.startAngle, 0);
+	  });
+
+	  it('should have an end angle of 6.283', function () {
+	    var ball = new Ball({ context: {}, canvas: {} });
+	    assert.equal(ball.endAngle, 2 * Math.PI);
+	  });
+
+	  it('should have a default speed of 3', function () {
+	    var ball = new Ball({ context: {}, canvas: {} });
+	    assert.equal(ball.speed, 3);
+	  });
+
+	  it('should have a lateral speed of 3', function () {
+	    var ball = new Ball({ context: {}, canvas: {} });
+	    assert.equal(ball.dx, 3);
+	  });
+
+	  it('should have a vertical speed of -3', function () {
+	    var ball = new Ball({ context: {}, canvas: {} });
+	    assert.equal(ball.dy, -3);
+	  });
+
+	  it('should start with three lives', function () {
+	    var ball = new Ball({ context: {}, canvas: {} });
+	    assert.equal(ball.lives, 3);
+	  });
+
+	  it('should start with a game score of 0', function () {
+	    var ball = new Ball({ context: {}, canvas: {} });
+	    assert.equal(ball.gameScore, 0);
+	  });
+
+	  it('should have a default color of black', function () {
+	    var ball = new Ball({ context: {}, canvas: {} });
+	    assert.equal(ball.color, '#000000');
+	  });
 	});
 
-	describe('ball prototypes', function () {
+	describe('Ball prototypes', function () {
 	  var ball = new Ball({ context: {}, canvas: { width: 400, height: 300 } });
 
 	  it('should have a method called "drawBall()"', function () {
@@ -9104,16 +9145,68 @@
 	  it('should have a method called "move()"', function () {
 	    assert.isFunction(ball.move);
 	  });
-	  it('"move()" should move increase the speed of the ball by this.dx and this.dy', function () {
 
+	  it('should increase x position by 3 and decrease y position by 3', function () {
 	    ball.move();
+	    assert.equal(ball.x, 203);
+	    assert.equal(ball.y, 257);
+	  });
 
-	    assert.equal(ball.x, 202);
-	    assert.equal(ball.y, 148);
+	  it('should have a resetBall method', function () {
+	    assert.isFunction(ball.resetBall);
+	  });
+
+	  it('should reset ball to x position of 200 and y position of 260', function () {
+	    ball.resetBall();
+	    assert.equal(ball.x, 200);
+	    assert.equal(ball.y, 260);
+	  });
+
+	  it('should set moveBallTrigger to false', function () {
+	    ball.resetBall();
+	    assert.equal(ball.moveBallTrigger, false);
+	  });
+
+	  it('should have a startBall method', function () {
+	    assert.isFunction(ball.startBall);
+	  });
+
+	  it('should have an up method', function () {
+	    assert.isFunction(ball.up);
+	  });
+
+	  it('should change speed to -3', function () {
+	    ball.up();
+	    assert.equal(ball.dy, -3);
+	  });
+
+	  it('should have a down method', function () {
+	    assert.isFunction(ball.down);
+	  });
+
+	  it('should change speed to 3', function () {
+	    ball.down();
+	    assert.equal(ball.dy, 3);
+	  });
+
+	  it('should have a right method', function () {
+	    assert.isFunction(ball.right);
+	  });
+
+	  it('should change speed to 3', function () {
+	    ball.right();
+	    assert.equal(ball.dx, 3);
+	  });
+
+	  it('should have a left method', function () {
+	    assert.isFunction(ball.left);
+	  });
+
+	  it('should change speed to -3', function () {
+	    ball.left();
+	    assert.equal(ball.dx, -3);
 	  });
 	});
-
-	// var ball = new Ball ({x: 10, y: 10,, context: {} canvas:{width: 500, height: 300}})
 
 /***/ },
 /* 57 */

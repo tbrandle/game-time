@@ -44,11 +44,6 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
-	/************************************
-	      global variables
-	 ************************************/
-
 	const canvas = document.getElementById('game');
 	const context = canvas.getContext('2d');
 
@@ -58,223 +53,6 @@
 	const Game = __webpack_require__(4);
 
 	let game = new Game({ context: context });
-	// let ball = new Ball({context: context, canvas: canvas});
-	// let paddle = new Paddle({context: context, canvas: canvas});
-
-	// var blocks = [];
-	// var level = 2;
-	// var gameScore = 0;
-	// // var ball.moveBallTrigger = false;
-	// // var ball.startGameTrigger = false;
-	//
-	/************************************
-	    collision detection & boundries
-	 ************************************/
-
-	// function canvasBoundries(ball, paddle) {
-	//   if ((ball.y - ball.radius) <= 0 ) {
-	//     ball.y = ball.radius;
-	//     ball.down();
-	//   }
-	//   if ((ball.x + ball.radius) > canvas.width){
-	//     ball.x = canvas.width - ball.radius;
-	//     ball.left();
-	//   }
-	//   if ((ball.x - ball.radius) < 0){
-	//     ball.x = ball.radius;
-	//     ball.right();
-	//   }
-	//   if ((ball.y - ball.radius) > 300) {
-	//     ball.resetBall();
-	//     ball.lives --;
-	//   }
-	//   if (paddle.x >= canvas.width - paddle.width) {
-	//     paddle.x = 300;
-	//   } else if (paddle.x <= 0) {
-	//     paddle.x = 0;
-	//   }
-	// }
-
-	// function ballBoundries(object) {
-	//   if ((ball.y - ball.radius) < object.y + object.height && ball.x < object.x + object.width && ball.x > object.x && (ball.y - ball.radius) > object.y) {
-	//     ball.y = ball.y + ball.radius;
-	//     ball.down();
-	//     console.log(blocks);
-	//
-	//   }
-	//   if ((ball.y + ball.radius) > object.y && (ball.y + ball.radius) < object.y + object.height && ball.x < object.x + object.width && ball.x > object.x) {
-	//     ball.y = ball.y - ball.radius;
-	//     ball.up();
-	//   }
-	//   if ((ball.x + ball.radius) > object.x && (ball.x + ball.radius) < object.x + object.width && ball.y > object.y && ball.y < object.y + object.height) {
-	//     ball.x = ball.x - ball.radius;
-	//     ball.left();
-	//   }
-	//   if ((ball.x - ball.radius) > object.x && (ball.x - ball.radius) < object.x + object.width && ball.y > object.y && ball.y < object.y + object.height) {
-	//     ball.x = ball.x + ball.radius;
-	//     ball.right();
-	//   }
-	// }
-
-	/************************************
-	      constructing levels
-	 ************************************/
-	//
-	// function createFirstRow(obj) {
-	//   var xStart = obj.xStart;
-	//   var yStart =  obj.yStart || 10;
-	//   var spacing = obj.spacing;
-	//   var counter = obj.counter;
-	//   for (var i = 0; i < obj.num; i++) {
-	//     var block = new Block ({context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter});
-	//     blocks.push(block);
-	//   }
-	// }
-	// function createSecondRow(obj) {
-	//   var xStart = obj.xStart;
-	//   var yStart =  obj.yStart || 30;
-	//   var spacing = obj.spacing;
-	//   var counter = obj.counter;
-	//   for (var i = 0; i < obj.num; i++) {
-	//     var block = new Block ({context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter});
-	//     blocks.push(block);
-	//   }
-	// }
-	// function createThirdRow(obj) {
-	//   var xStart = obj.xStart;
-	//   var yStart =  obj.yStart || 50;
-	//   var spacing = obj.spacing;
-	//   var counter = obj.counter;
-	//   for (var i = 0; i < obj.num; i++) {
-	//     var block = new Block ({context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter});
-	//     blocks.push(block);
-	//   }
-	// }
-	//
-	// function createFourthRow(obj) {
-	//   var xStart = obj.xStart;
-	//   var yStart =  obj.yStart || 70;
-	//   var spacing = obj.spacing;
-	//   var counter = obj.counter;
-	//   for (var i = 0; i < obj.num; i++) {
-	//     var block = new Block ({context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter});
-	//     blocks.push(block);
-	//   }
-	// }
-	//
-	// function createFifthRow(obj) {
-	//   var xStart = obj.xStart;
-	//   var yStart = obj.yStart || 90;
-	//   var spacing = obj.spacing;
-	//   var counter = obj.counter;
-	//   for (var i = 0; i < obj.num; i++) {
-	//     var block = new Block ({context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter});
-	//     blocks.push(block);
-	//   }
-	// }
-	//
-	// function createSixthRow(obj) {
-	//   var xStart = obj.xStart;
-	//   var yStart =  obj.yStart || 110;
-	//   var spacing = obj.spacing;
-	//   var counter = obj.counter;
-	//   for (var i = 0; i < obj.num; i++) {
-	//     var block = new Block ({context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter});
-	//     blocks.push(block);
-	//   }
-	// }
-	//
-	// function levels() {
-	//
-	//   if (level === 1) {
-	//     createFirstRow({num: 7, xStart: -60, spacing: 60, counter: 1});
-	//  //    createSecondRow({num: 7, xStart: -60, spacing: 60, counter: 1});
-	//  //    createThirdRow({num: 7, xStart: -60, spacing: 60, counter: 1});
-	//  //    createFourthRow({num: 7, xStart: -60, spacing: 60, counter: 1});
-	//   } else if (level === 2) {
-	//     createFirstRow({num: 3, xStart: -100, spacing: 130, counter: 3});
-	//  //    createSecondRow({num: 3, xStart: 0, spacing: 80, counter: 2});
-	//  //    createThirdRow({num: 1, xStart: 60, spacing: 100, counter: 1});
-	//  //    createFourthRow({num: 3, xStart: 0, spacing: 80, counter: 2});
-	//  //    createFifthRow({num: 3, xStart: -100, spacing: 130, counter: 3});
-	//  //  } else if (level === 3) {
-	//  //    createFirstRow({num: 7, xStart: -60, spacing: 60, counter: 1});
-	//  //    createSecondRow({num: 2, xStart: -70, spacing: 165, counter: 1});
-	//  //    createThirdRow({num: 2, xStart: 88, spacing: 60, counter: 3});
-	//  //    createFourthRow({num: 2, xStart: 0, spacing: 120, counter: 3});
-	//  //    createFifthRow({num: 2, xStart: -70, spacing: 165, counter: 3});
-	//  //    createSixthRow({num: 7, xStart: -60, spacing: 60, counter: 1});
-	//  //  } else if (level === 4) {
-	//  //    createFirstRow({num: 6, xStart: 15, spacing: 55, counter: 1});
-	//  //    createSecondRow({num: 5, xStart: -60, spacing: 55, yStart: 50, counter: 1});
-	//  //    createThirdRow({num: 6, xStart: -60, spacing: 55, yStart: 90, counter: 3});
-	//  //    createFourthRow({num: 5, xStart: -60, spacing: 55, yStart: 130, counter: 3});
-	//   }
-	// }
-
-
-	/************************************
-	        game play
-	 ************************************/
-
-	// function levelPass() {
-	//   var blockHeight = blocks.every(checkHeight);
-	//   function checkHeight(blocks) {
-	//     if (blocks.height !== 0) {
-	//       return false;
-	//     } else {
-	//       return true;
-	//     }
-	//   }
-	//   if (blockHeight === true && level < 4 && level >= 0) {
-	//     level++;
-	//     ball.startGameTrigger = false;
-	//     $('.level-pass').css('display', 'flex');
-	//     $('.level').text('Level ' + level);
-	//     ball.resetBall();
-	//     paddle.x = (canvas.width - 100) / 2;
-	//     levels();
-	//     removeMessageDisplay();
-	//   } else if (blockHeight === true && level === 4) {
-	//       $('.winner').css('display', 'flex');
-	//       $('.level-pass').css('display', 'none');
-	//       resetGame();
-	//     }
-	//   }
-	//
-	// function resetGame() {
-	//   $('.start-new-game').on('click', function() {
-	//     blocks = [];
-	//     $('.message').css('display', 'none');
-	//     ball.moveBallTrigger = false;
-	//     ball.lives = 3;
-	//     ball.gameScore = 0;
-	//     level = 0;
-	//   });
-	// }
-	//
-	// function gameOver() {
-	//   if (ball.lives === 0) {
-	//     $('.game-over').css('display', 'flex');
-	//     removeMessageDisplay();
-	//     resetGame();
-	//     ball.lives = 3;
-	//   }
-	// }
-	//
-	// function removeMessageDisplay() {
-	//   $('.start-game').on('click', function() {
-	//     // blocks = [];
-	//     $('.message').css('display', 'none');
-	//     ball.moveBallTrigger = false;
-	//     ball.startGameTrigger = true;
-	//     ball.gameScore = 0;
-	//   });
-	// }
-	//
-	/************************************
-	      Event Listeners
-	 ************************************/
 
 	$('body').keydown(function (event) {
 	  var direction = event.keyCode;
@@ -295,21 +73,15 @@
 	  game.ball.canvasBoundries();
 	  game.ball.ballBoundries(game.paddle);
 	  game.paddle.canvasBoundries();
-
-	  // game.blocks = game.blocks.filter(function(block) {
-	  //   return block.counter !== 0;
-	  // });
 	  game.blocks.forEach(function (block) {
-	    block.draw();
-	    game.ball.ballBoundries(block);
-	    // block.remove(game.ball);
+	    if (block.counter) {
+	      block.draw();
+	      game.ball.ballBoundries(block);
+	    }
 	  });
-
-	  // ballBoundries(paddle);
-	  // canvasBoundries(ball, paddle);
 	  game.levelPass();
 	  game.gameOver();
-	  // game.resetGame();
+	  game.resetGame();
 	  requestAnimationFrame(gameLoop);
 	});
 
@@ -344,45 +116,13 @@
 	};
 
 	Block.prototype.remove = function (ball) {
-	  if (ball) {
-	    if (this.counter <= 0) {
-	      this.context.clearRect(this.x, this.y, this.width, this.height);
-	      this.height = 0;
-	      // console.log(this.counter);
-	    }
-
-	    if (ball.y - ball.radius >= this.y + this.height && ball.y + ball.radius <= this.y && ball.x + ball.radius <= this.x && ball.x - ball.radius >= this.x + this.width) {
-	      console.log("test");
-	      this.counter--;
-	    }
+	  if (this.counter <= 0) {
+	    this.context.clearRect(this.x, this.y, this.width, this.height);
+	    this.height = 0;
+	    this.width = 0;
+	  } else {
+	    this.counter--;
 	  }
-	  //
-	  // if ((ball.y - ball.radius) < this.y + this.height && ball.x < this.x + this.width && ball.x > this.x && (ball.y - ball.radius) > this.y) {
-	  //   // ball.gameScore += 10;
-	  //   this.counter--;
-	  //   // console.log(this.counter);
-	  //
-	  // }
-	  //
-	  // if ((ball.y + ball.radius) > this.y && (ball.y + ball.radius) < this.y + this.height && ball.x < this.x + this.width && ball.x > this.x) {
-	  //   // ball.gameScore += 10;
-	  //   this.counter--;
-	  //   // console.log(this.counter);
-	  //
-	  // }
-	  //
-	  // if ((ball.x + ball.radius) > this.x && (ball.x + ball.radius) < this.x + this.width && ball.y > this.y && ball.y < this.y + this.height) {
-	  //   // ball.gameScore += 10;
-	  //   this.counter--;
-	  //   // console.log(this.counter);
-	  //
-	  // }
-	  //
-	  // if ((ball.x - ball.radius) > this.x && (ball.x - ball.radius) < this.x + this.width && ball.y > this.y && ball.y < this.y + this.height) {
-	  //   ball.gameScore += 10;
-	  //   this.counter--;
-	  //   ball.gameScore += 10;
-	  // }
 	};
 
 	module.exports = Block;
@@ -390,8 +130,6 @@
 /***/ },
 /* 2 */
 /***/ function(module, exports) {
-
-	
 
 	function Paddle(options) {
 	  this.x = 150;
@@ -431,8 +169,8 @@
 /* 3 */
 /***/ function(module, exports) {
 
-	const canvas = document.getElementById('game');
-	const context = canvas.getContext('2d');
+	// const canvas = document.getElementById('game');
+	// const context = canvas.getContext('2d');
 
 	function Ball(options) {
 	  this.x = 200;
@@ -480,8 +218,7 @@
 	      ball.moveBallTrigger = true;
 	    }
 	  });
-	  if (this.moveBallTrigger === true) {
-	    //Need to add the (&& this.startGameTrigger === true)
+	  if (this.moveBallTrigger === true && this.startGameTrigger === true) {
 	    ball.move();
 	  }
 	};
@@ -526,28 +263,28 @@
 	    this.y = this.y + this.radius;
 	    this.down();
 	    if (object.type === "block") {
-	      object.remove(game.ball);
+	      object.remove(this);
 	    }
 	  }
 	  if (this.y + this.radius > object.y && this.y + this.radius < object.y + object.height && this.x < object.x + object.width && this.x > object.x) {
 	    this.y = this.y - this.radius;
 	    this.up();
 	    if (object.type === "block") {
-	      object.remove(game.ball);
+	      object.remove(this);
 	    }
 	  }
 	  if (this.x + this.radius > object.x && this.x + this.radius < object.x + object.width && this.y > object.y && this.y < object.y + object.height) {
 	    this.x = this.x - this.radius;
 	    this.left();
 	    if (object.type === "block") {
-	      object.remove(game.ball);
+	      object.remove(this);
 	    }
 	  }
 	  if (this.x - this.radius > object.x && this.x - this.radius < object.x + object.width && this.y > object.y && this.y < object.y + object.height) {
 	    this.x = this.x + this.radius;
 	    this.right();
 	    if (object.type === "block") {
-	      object.remove(game.ball);
+	      object.remove(this);
 	    }
 	  }
 	};
@@ -558,8 +295,8 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const canvas = document.getElementById('game');
-	const context = canvas.getContext('2d');
+	// const canvas = document.getElementById('game');
+	// const context = canvas.getContext('2d');
 
 	const Block = __webpack_require__(1);
 	const Ball = __webpack_require__(3);
@@ -577,9 +314,9 @@
 	  this.paddle = new Paddle(options);
 	}
 
-	Game.prototype.createFirstRow = function (obj) {
+	Game.prototype.createRow = function (obj) {
 	  var xStart = obj.xStart;
-	  var yStart = obj.yStart || 10;
+	  var yStart = obj.yStart;
 	  var spacing = obj.spacing;
 	  var counter = obj.counter;
 	  for (var i = 0; i < obj.num; i++) {
@@ -587,95 +324,41 @@
 	    this.blocks.push(block);
 	  }
 	};
-
-	Game.prototype.createSecondRow = function (obj) {
-	  var xStart = obj.xStart;
-	  var yStart = obj.yStart || 30;
-	  var spacing = obj.spacing;
-	  var counter = obj.counter;
-	  for (var i = 0; i < obj.num; i++) {
-	    var block = new Block({ context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter });
-	    this.blocks.push(block);
-	  }
-	};
-
-	Game.prototype.createThirdRow = function (obj) {
-	  var xStart = obj.xStart;
-	  var yStart = obj.yStart || 50;
-	  var spacing = obj.spacing;
-	  var counter = obj.counter;
-	  for (var i = 0; i < obj.num; i++) {
-	    var block = new Block({ context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter });
-	    this.blocks.push(block);
-	  }
-	};
-
-	Game.prototype.createFourthRow = function (obj) {
-	  var xStart = obj.xStart;
-	  var yStart = obj.yStart || 70;
-	  var spacing = obj.spacing;
-	  var counter = obj.counter;
-	  for (var i = 0; i < obj.num; i++) {
-	    var block = new Block({ context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter });
-	    this.blocks.push(block);
-	  }
-	};
-
-	Game.prototype.createFifthRow = function (obj) {
-	  var xStart = obj.xStart;
-	  var yStart = obj.yStart || 90;
-	  var spacing = obj.spacing;
-	  var counter = obj.counter;
-	  for (var i = 0; i < obj.num; i++) {
-	    var block = new Block({ context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter });
-	    this.blocks.push(block);
-	  }
-	};
-
-	Game.prototype.createSixthRow = function (obj) {
-	  var xStart = obj.xStart;
-	  var yStart = obj.yStart || 110;
-	  var spacing = obj.spacing;
-	  var counter = obj.counter;
-	  for (var i = 0; i < obj.num; i++) {
-	    var block = new Block({ context: context, x: xStart += spacing, y: yStart, height: obj.height, counter: counter });
-	    this.blocks.push(block);
-	  }
-	};
-
 	Game.prototype.buildLevels = function () {
 	  if (this.level === 1) {
-	    this.createFirstRow({ num: 7, xStart: -60, spacing: 60, counter: 1 });
-	    this.createSecondRow({ num: 7, xStart: -60, spacing: 60, counter: 1 });
-	    this.createThirdRow({ num: 7, xStart: -60, spacing: 60, counter: 1 });
-	    this.createFourthRow({ num: 7, xStart: -60, spacing: 60, counter: 1 });
+	    this.createRow({ num: 6, xStart: -55, yStart: 10, spacing: 65, counter: 1 });
+	    this.createRow({ num: 6, xStart: -55, yStart: 30, spacing: 65, counter: 1 });
+	    this.createRow({ num: 6, xStart: -55, yStart: 50, spacing: 65, counter: 1 });
+	    this.createRow({ num: 6, xStart: -55, yStart: 70, spacing: 65, counter: 1 });
 	  } else if (this.level === 2) {
-	    this.createFirstRow({ num: 3, xStart: -100, spacing: 130, counter: 3 });
-	    this.createSecondRow({ num: 3, xStart: 0, spacing: 80, counter: 2 });
-	    this.createThirdRow({ num: 1, xStart: 60, spacing: 100, counter: 1 });
-	    this.createFourthRow({ num: 3, xStart: 0, spacing: 80, counter: 2 });
-	    this.createFifthRow({ num: 3, xStart: -100, spacing: 130, counter: 3 });
+	    this.createRow({ num: 3, xStart: -100, yStart: 10, spacing: 130, counter: 3 });
+	    this.createRow({ num: 3, xStart: 0, yStart: 30, spacing: 80, counter: 2 });
+	    this.createRow({ num: 1, xStart: 60, yStart: 50, spacing: 100, counter: 1 });
+	    this.createRow({ num: 3, xStart: 0, yStart: 70, spacing: 80, counter: 2 });
+	    this.createRow({ num: 3, xStart: -100, yStart: 90, spacing: 130, counter: 3 });
 	  } else if (this.level === 3) {
-	    this.createFirstRow({ num: 7, xStart: -60, spacing: 60, counter: 1 });
-	    this.createSecondRow({ num: 2, xStart: -70, spacing: 165, counter: 1 });
-	    this.createThirdRow({ num: 2, xStart: 88, spacing: 60, counter: 3 });
-	    this.createFourthRow({ num: 2, xStart: 0, spacing: 120, counter: 3 });
-	    this.createFifthRow({ num: 2, xStart: -70, spacing: 165, counter: 3 });
-	    this.createSixthRow({ num: 7, xStart: -60, spacing: 60, counter: 1 });
+	    this.createRow({ num: 7, xStart: -60, yStart: 10, spacing: 60, counter: 1 });
+	    this.createRow({ num: 2, xStart: -70, yStart: 30, spacing: 165, counter: 1 });
+	    this.createRow({ num: 2, xStart: 88, yStart: 50, spacing: 60, counter: 3 });
+	    this.createRow({ num: 2, xStart: 0, yStart: 70, spacing: 120, counter: 3 });
+	    this.createRow({ num: 2, xStart: -70, yStart: 90, spacing: 165, counter: 3 });
+	    this.createRow({ num: 7, xStart: -60, yStart: 110, spacing: 60, counter: 1 });
 	  } else if (this.level === 4) {
-	    this.createFirstRow({ num: 6, xStart: 15, spacing: 55, counter: 1 });
-	    this.createSecondRow({ num: 5, xStart: -60, spacing: 55, yStart: 50, counter: 1 });
-	    this.createThirdRow({ num: 6, xStart: -60, spacing: 55, yStart: 90, counter: 3 });
-	    this.createFourthRow({ num: 5, xStart: -60, spacing: 55, yStart: 130, counter: 3 });
+	    this.createRow({ num: 4, xStart: -75, yStart: 10, spacing: 100, counter: 3 });
+	    this.createRow({ num: 6, xStart: -55, yStart: 30, spacing: 65, counter: 2 });
+	    this.createRow({ num: 4, xStart: -75, yStart: 50, spacing: 100, counter: 3 });
+	    this.createRow({ num: 6, xStart: -55, yStart: 70, spacing: 65, counter: 2 });
+	    this.createRow({ num: 7, xStart: -45, yStart: 90, spacing: 55, counter: 1 });
 	  }
 	};
 
 	Game.prototype.removeMessageDisplay = function () {
+	  var game = this;
 	  $('.start-game').on('click', function () {
 	    this.blocks = [];
 	    $('.message').css('display', 'none');
-	    this.ball.resetBall();
-	    startGameTrigger = true;
+	    game.ball.resetBall();
+	    game.ball.startGameTrigger = true;
 	    gameScore = 0;
 	  });
 	};
@@ -689,14 +372,15 @@
 	      return true;
 	    }
 	  }
-	  if (blockHeight === true && this.level < 4 && this.level >= 0) {
+	  if (blockHeight === true && this.level < 1 && this.level >= 0) {
 	    this.level++;
-	    startGameTrigger = false;
+	    this.ball.startGameTrigger = false;
 	    $('.level-pass').css('display', 'flex');
 	    $('.level').text('Level ' + this.level);
 	    this.buildLevels();
 	    this.removeMessageDisplay();
-	  } else if (blockHeight === true && this.level === 4) {
+	    this.ball.resetBall();
+	  } else if (blockHeight === true && this.level === 1) {
 	    $('.winner').css('display', 'flex');
 	    $('.level-pass').css('display', 'none');
 	    this.resetGame();
@@ -704,22 +388,24 @@
 	};
 
 	Game.prototype.resetGame = function () {
+	  var game = this;
 	  $('.start-new-game').on('click', function () {
-	    this.blocks = [];
+	    game.blocks = [];
 	    $('.message').css('display', 'none');
-	    this.ball.resetBall();
-	    this.ball.lives = 3;
+	    game.ball.resetBall();
+	    game.ball.lives = 3;
 	    gameScore = 0;
-	    this.level = 0;
+	    game.level = 0;
 	  });
 	};
 
 	Game.prototype.gameOver = function () {
 	  if (this.ball.lives === 0) {
+	    var game = this;
 	    $('.game-over').css('display', 'flex');
-	    this.removeMessageDisplay();
-	    this.resetGame();
-	    this.ball.lives = 3;
+	    game.removeMessageDisplay();
+	    game.resetGame();
+	    game.ball.lives = 3;
 	  }
 	};
 
