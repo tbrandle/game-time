@@ -82,4 +82,58 @@ describe('Ball prototypes', function () {
     assert.equal(ball.y, 257);
   });
 
+  it('should have a resetBall method', function() {
+    assert.isFunction(ball.resetBall);
+  });
+
+  it('should reset ball to x position of 200 and y position of 260', function() {
+    ball.resetBall();
+    assert.equal(ball.x, 200);
+    assert.equal(ball.y, 260);
+  });
+
+  it('should set moveBallTrigger to false', function() {
+    ball.resetBall();
+    assert.equal(ball.moveBallTrigger, false);
+  });
+
+  it('should have a startBall method', function() {
+    assert.isFunction(ball.startBall);
+  });
+
+  it('should have an up method', function() {
+    assert.isFunction(ball.up);
+  });
+
+  it('should change speed to -3', function() {
+    ball.up();
+    assert.equal(ball.dy, -3);
+  });
+
+  it('should have a down method', function() {
+    assert.isFunction(ball.down);
+  });
+
+  it('should change speed to 3', function() {
+    ball.down();
+    assert.equal(ball.dy, 3);
+  });
+
+  it('should have a right method', function() {
+    assert.isFunction(ball.right);
+  });
+
+  it('should change speed to 3', function() {
+    ball.right();
+    assert.equal(ball.dx, 3);
+  });
+
+  it('should have a left method', function() {
+    assert.isFunction(ball.left);
+  });
+
+  it('should change speed to -3', function() {
+    ball.left();
+    assert.equal(ball.dx, -3);
+  });
 })
