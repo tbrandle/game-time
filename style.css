@@ -19,6 +19,16 @@ body {
   background-color: white;
 }
 
+.game-instructions {
+  font-family: 'Orbitron', serif;
+}
+
+.game-instructions ul {
+  margin: 0;
+  padding: 0 0 0 15px;
+  line-height: 1.5;
+}
+
 .message {
   width: 400px;
   height:300px;
