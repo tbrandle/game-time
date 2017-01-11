@@ -65,25 +65,21 @@ describe('Ball', function () {
   })
 })
 
-describe('ball prototypes', function () {
+describe('Ball prototypes', function () {
   var ball = new Ball({context: {}, canvas:{width: 400, height: 300}});
 
-  it('should have a method called "drawBall()"', function () {
+  it('should have a method called "drawBall()"', function() {
     assert.isFunction(ball.drawBall);
   })
 
-  it('should have a method called "move()"', function () {
+  it('should have a method called "move()"', function() {
       assert.isFunction(ball.move)
-  })
-  it('"move()" should move increase the speed of the ball by this.dx and this.dy', function () {
+  });
 
+  it('should increase x position by 3 and decrease y position by 3', function () {
     ball.move();
-
-    assert.equal(ball.x, 202);
-    assert.equal(ball.y, 148);
-  })
-
+    assert.equal(ball.x, 203);
+    assert.equal(ball.y, 257);
+  });
 
 })
-
-// var ball = new Ball ({x: 10, y: 10,, context: {} canvas:{width: 500, height: 300}})

@@ -32,6 +32,13 @@ describe('Paddle', function() {
   it('should have a default color', function() {
     var paddle = new Paddle({context: {}, canvas: {}});
     assert.equal(paddle.color, '#91c09e');
-  })
+  });
+})
 
-});
+describe('Paddle prototypes', function() {
+
+  it('should have a move method', function() {
+    var paddle = new Paddle({context: {}, canvas: {}});
+    assert.isFunction(paddle.move);
+  });
+})
