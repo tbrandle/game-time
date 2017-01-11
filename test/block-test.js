@@ -4,7 +4,6 @@ const assert = chai.assert;
 const Block = require('../lib/block');
 
 describe('Block', function() {
-  context('with default attributes', function() {
 
     it('creates new blocks', function() {
       assert.isFunction(Block);
@@ -40,4 +39,3 @@ describe('Block', function() {
       assert.isFunction(block.remove);
     });
   });
-});
