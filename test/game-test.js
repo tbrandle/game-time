@@ -4,7 +4,7 @@ const assert = chai.assert;
 const Game = require('../lib/levels');
 const Ball = require('../lib/ball');
 const Paddle = require('../lib/paddle');
-
+const Block = require('../lib/block');
 
 describe('Levels', function() {
 
