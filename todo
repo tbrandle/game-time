@@ -3,3 +3,8 @@ TODO:
 - increase canvas size
 - change direction of Paddle
 - add instructions
+
+
+Problems:
+- Any game prototypes will not read ball prototypes.
+- The ball boundries for block does not work. It won't decrease the counter.

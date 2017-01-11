@@ -8,8 +8,14 @@ describe('paddle object contructor', function() {
   it('create paddle', function() {
     assert.isFunction(Paddle);
   });
+
   it('should have default y position', function() {
     var paddle = new Paddle({context: {}, canvas: {width: 400}});
     assert.equal(paddle.y, 275);
+  });
+
+  it('should have a default width of 100', function() {
+    var paddle = new Paddle({context: {}, canvas: {width: 400}});
+    assert.equal(paddle.x, 150);
   })
 });
