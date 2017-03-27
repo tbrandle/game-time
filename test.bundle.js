@@ -90,13 +90,11 @@
 	  return this;
 	};
 
-	Block.prototype.remove = function (ball) {
+	Block.prototype.remove = function () {
 	  if (this.counter <= 0) {
 	    this.context.clearRect(this.x, this.y, this.width, this.height);
-	    this.height = 0;
 	    this.width = 0;
-	  } else {
-	    this.counter--;
+	    this.height = 0;
 	  }
 	};
 
@@ -144,8 +142,8 @@
 /* 3 */
 /***/ function(module, exports) {
 
-	// const canvas = document.getElementById('game');
-	// const context = canvas.getContext('2d');
+	const canvas = document.getElementById('game');
+	const context = canvas.getContext('2d');
 
 	function Ball(options) {
 	  this.x = 200;
@@ -238,28 +236,36 @@
 	    this.y = this.y + this.radius;
 	    this.down();
 	    if (object.type === "block") {
-	      object.remove(this);
+	      object.counter--;
+	      object.remove();
+	      this.gameScore += 10;
 	    }
 	  }
 	  if (this.y + this.radius > object.y && this.y + this.radius < object.y + object.height && this.x < object.x + object.width && this.x > object.x) {
 	    this.y = this.y - this.radius;
 	    this.up();
 	    if (object.type === "block") {
-	      object.remove(this);
+	      object.counter--;
+	      object.remove();
+	      this.gameScore += 10;
 	    }
 	  }
 	  if (this.x + this.radius > object.x && this.x + this.radius < object.x + object.width && this.y > object.y && this.y < object.y + object.height) {
 	    this.x = this.x - this.radius;
 	    this.left();
 	    if (object.type === "block") {
-	      object.remove(this);
+	      object.counter--;
+	      object.remove();
+	      this.gameScore += 10;
 	    }
 	  }
 	  if (this.x - this.radius > object.x && this.x - this.radius < object.x + object.width && this.y > object.y && this.y < object.y + object.height) {
 	    this.x = this.x + this.radius;
 	    this.right();
 	    if (object.type === "block") {
-	      object.remove(this);
+	      object.counter--;
+	      object.remove();
+	      this.gameScore += 10;
 	    }
 	  }
 	};
