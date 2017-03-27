@@ -115,13 +115,11 @@
 	  return this;
 	};
 
-	Block.prototype.remove = function (ball) {
+	Block.prototype.remove = function () {
 	  if (this.counter <= 0) {
 	    this.context.clearRect(this.x, this.y, this.width, this.height);
-	    this.height = 0;
 	    this.width = 0;
-	  } else {
-	    this.counter--;
+	    this.height = 0;
 	  }
 	};
 
@@ -169,8 +167,8 @@
 /* 3 */
 /***/ function(module, exports) {
 
-	// const canvas = document.getElementById('game');
-	// const context = canvas.getContext('2d');
+	const canvas = document.getElementById('game');
+	const context = canvas.getContext('2d');
 
 	function Ball(options) {
 	  this.x = 200;
@@ -263,28 +261,36 @@
 	    this.y = this.y + this.radius;
 	    this.down();
 	    if (object.type === "block") {
-	      object.remove(this);
+	      object.counter--;
+	      object.remove();
+	      this.gameScore += 10;
 	    }
 	  }
 	  if (this.y + this.radius > object.y && this.y + this.radius < object.y + object.height && this.x < object.x + object.width && this.x > object.x) {
 	    this.y = this.y - this.radius;
 	    this.up();
 	    if (object.type === "block") {
-	      object.remove(this);
+	      object.counter--;
+	      object.remove();
+	      this.gameScore += 10;
 	    }
 	  }
 	  if (this.x + this.radius > object.x && this.x + this.radius < object.x + object.width && this.y > object.y && this.y < object.y + object.height) {
 	    this.x = this.x - this.radius;
 	    this.left();
 	    if (object.type === "block") {
-	      object.remove(this);
+	      object.counter--;
+	      object.remove();
+	      this.gameScore += 10;
 	    }
 	  }
 	  if (this.x - this.radius > object.x && this.x - this.radius < object.x + object.width && this.y > object.y && this.y < object.y + object.height) {
 	    this.x = this.x + this.radius;
 	    this.right();
 	    if (object.type === "block") {
-	      object.remove(this);
+	      object.counter--;
+	      object.remove();
+	      this.gameScore += 10;
 	    }
 	  }
 	};
@@ -295,15 +301,12 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// const canvas = document.getElementById('game');
-	// const context = canvas.getContext('2d');
+	const canvas = document.getElementById('game');
+	const context = canvas.getContext('2d');
 
 	const Block = __webpack_require__(1);
 	const Ball = __webpack_require__(3);
 	const Paddle = __webpack_require__(2);
-
-	// var startGameTrigger = false;
-	var gameScore = 0;
 
 	function Game(options) {
 	  this.blocks = [];
@@ -359,7 +362,6 @@
 	    $('.message').css('display', 'none');
 	    game.ball.resetBall();
 	    game.ball.startGameTrigger = true;
-	    gameScore = 0;
 	  });
 	};
 
@@ -372,7 +374,7 @@
 	      return true;
 	    }
 	  }
-	  if (blockHeight === true && this.level < 1 && this.level >= 0) {
+	  if (blockHeight === true && this.level < 4 && this.level >= 0) {
 	    this.level++;
 	    this.ball.startGameTrigger = false;
 	    $('.level-pass').css('display', 'flex');
@@ -380,7 +382,7 @@
 	    this.buildLevels();
 	    this.removeMessageDisplay();
 	    this.ball.resetBall();
-	  } else if (blockHeight === true && this.level === 1) {
+	  } else if (blockHeight === true && this.level === 4) {
 	    $('.winner').css('display', 'flex');
 	    $('.level-pass').css('display', 'none');
 	    this.resetGame();
@@ -394,7 +396,7 @@
 	    $('.message').css('display', 'none');
 	    game.ball.resetBall();
 	    game.ball.lives = 3;
-	    gameScore = 0;
+	    game.ball.gameScore = 0;
 	    game.level = 0;
 	  });
 	};
