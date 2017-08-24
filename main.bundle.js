@@ -327,6 +327,7 @@
 	    this.blocks.push(block);
 	  }
 	};
+
 	Game.prototype.buildLevels = function () {
 	  if (this.level === 1) {
 	    this.createRow({ num: 6, xStart: -55, yStart: 10, spacing: 65, counter: 1 });
